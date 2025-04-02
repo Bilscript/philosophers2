@@ -6,7 +6,7 @@
 /*   By: bhamani <bhamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:52:07 by bhamani           #+#    #+#             */
-/*   Updated: 2025/03/31 16:31:47 by bhamani          ###   ########.fr       */
+/*   Updated: 2025/04/03 00:26:30 by bhamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 # include <limits.h>
 # include <errno.h>
 
-
-typedef struct s_table t_table;
+typedef struct s_table	t_table;
 
 typedef enum e_mutex
 {
@@ -43,7 +42,7 @@ typedef enum e_time_code
 	MICROSECOND,
 }		t_time_code;
 
-typedef	enum e_status
+typedef enum e_status
 {
 	EATING,
 	SLEEPING,
@@ -95,7 +94,8 @@ int		ft_atoi(const char *str);
 void	error_exit(char *str);
 void	set_input(t_table *table, char **av);
 void	*safe_malloc(size_t bytes);
-void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data, t_mutex namecode);
+void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *),
+			void *data, t_mutex namecode);
 void	safe_mutex_handle(pthread_mutex_t *mutex, t_mutex namecode);
 void	table_init(t_table *table);
 void	set_bool(pthread_mutex_t *mutex, bool *dest, bool value);
@@ -110,13 +110,10 @@ void	precise_usleep(long usec, t_table *table);
 void	*monitoring(void *data);
 void	dinner_start(t_table *table);
 void	increase_long(pthread_mutex_t *mutex, long *value);
-bool	all_threads_running(pthread_mutex_t *mutex, long *threads, long philo_nbr);
+bool	all_threads_running(pthread_mutex_t *mutex,
+			long *threads, long philo_nbr);
 void	clean(t_table *table);
-
-
-
-
-
-
+void	thinking(t_philo *philo, bool pre_sim);
+void	de_sync_philo(t_philo *philo);
 
 #endif

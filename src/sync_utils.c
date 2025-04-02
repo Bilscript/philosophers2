@@ -6,7 +6,7 @@
 /*   By: bhamani <bhamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 13:05:53 by bhamani           #+#    #+#             */
-/*   Updated: 2025/03/31 13:50:44 by bhamani          ###   ########.fr       */
+/*   Updated: 2025/04/03 00:26:56 by bhamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	wait_threads(t_table *table)
 		usleep(100);
 }
 
-bool	all_threads_running(pthread_mutex_t *mutex, long *threads, long philo_nbr)
+bool	all_threads_running(pthread_mutex_t *mutex,
+			long *threads, long philo_nbr)
 {
 	bool	res;
 
@@ -37,3 +38,16 @@ void	increase_long(pthread_mutex_t *mutex, long *value)
 	safe_mutex_handle(mutex, UNLOCK);
 }
 
+void	de_sync_philo(t_philo *philo)
+{
+	if (philo->table->nbr_philo % 2 == 0)
+	{
+		if (philo->id % 2 == 0)
+			precise_usleep(3000, philo->table);
+	}
+	else
+	{
+		if (philo->id % 2)
+			thinking(philo, true);
+	}
+}

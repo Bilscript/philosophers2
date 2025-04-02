@@ -12,28 +12,30 @@
 
 #include "philo.h"
 
-static bool philo_died(t_philo *philo)
+static bool	philo_died(t_philo *philo)
 {
 	long	past_time;
 	long	tto_die;
 
 	if (get_bool(&philo->philo_mutex, &philo->full))
-		return(false);
-	past_time = get_time(MILLISECOND) - get_long(&philo->philo_mutex, &philo->last_meal_time);
+		return (false);
+	past_time = get_time(MILLISECOND) - get_long(&philo->philo_mutex,
+			&philo->last_meal_time);
 	tto_die = philo->table->time_to_die / 1000;
 	if (past_time > tto_die)
 		return (true);
-	return(false);
+	return (false);
 }
 
-void *monitoring(void *data)
+void	*monitoring(void *data)
 {
-	t_table *table;
+	t_table	*table;
 	int		i;
 
 	table = (t_table *)data;
-	while (!all_threads_running(&table->table_mutex, &table->threads_running_nbr, table->nbr_philo))
-    	usleep(100);
+	while (!all_threads_running(&table->table_mutex,
+			&table->threads_running_nbr, table->nbr_philo))
+		usleep (100);
 	while (!simulation_end(table))
 	{
 		usleep(100);
